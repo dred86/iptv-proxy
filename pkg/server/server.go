@@ -87,7 +87,11 @@ func (c *Config) Serve() error {
 	router.Use(cors.Default())
 	group := router.Group("/")
 	c.routes(group)
-
+	
+	if c.HostConfig.UnixSocket != "" {
+		return router.RunUnix(c.HostConfig.UnixSocket)
+	}
+	
 	return router.Run(fmt.Sprintf(":%d", c.HostConfig.Port))
 }
 
