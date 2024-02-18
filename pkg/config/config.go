@@ -39,6 +39,7 @@ func (c CredentialString) String() string {
 type HostConfiguration struct {
 	Hostname string
 	Port     int
+	UnixSocket string
 }
 
 // ProxyConfig Contain original m3u playlist and HostConfiguration
