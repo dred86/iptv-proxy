@@ -72,6 +72,7 @@ var rootCmd = &cobra.Command{
 			HostConfig: &config.HostConfiguration{
 				Hostname: viper.GetString("hostname"),
 				Port:     viper.GetInt("port"),
+				UnixSocket: viper.GetString("unix-socket"),
 			},
 			RemoteURL:            remoteHostURL,
 			XtreamUser:           config.CredentialString(xtreamUser),
@@ -124,6 +125,7 @@ func init() {
 	rootCmd.Flags().StringP("custom-endpoint", "", "", `Custom endpoint "http://poxy.com/<custom-endpoint>/iptv.m3u"`)
 	rootCmd.Flags().StringP("custom-id", "", "", `Custom anti-collison ID for each track "http://proxy.com/<custom-id>/..."`)
 	rootCmd.Flags().Int("port", 8080, "Iptv-proxy listening port")
+	rootCmd.Flags().String("unix-socket", "", "Unix Socket Path")
 	rootCmd.Flags().Int("advertised-port", 0, "Port to expose the IPTV file and xtream (by default, it's taking value from port) useful to put behind a reverse proxy")
 	rootCmd.Flags().String("hostname", "", "Hostname or IP to expose the IPTVs endpoints")
 	rootCmd.Flags().BoolP("https", "", false, "Activate https for urls proxy")
