@@ -28,7 +28,7 @@ import (
 	"strings"
 
 	"github.com/gin-contrib/cors"
-	"github.com/jamesnetherton/m3u"
+	"github.com/liguoqinjim/m3u"
 	"github.com/pierre-emmanuelJ/iptv-proxy/pkg/config"
 	uuid "github.com/satori/go.uuid"
 
