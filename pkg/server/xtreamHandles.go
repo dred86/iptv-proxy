@@ -32,7 +32,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jamesnetherton/m3u"
+	"github.com/liguoqinjim/m3u"
 	xtreamapi "github.com/pierre-emmanuelJ/iptv-proxy/pkg/xtream-proxy"
 	uuid "github.com/satori/go.uuid"
 )
