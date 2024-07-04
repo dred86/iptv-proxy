@@ -19,7 +19,6 @@
 package server
 
 import (
-	"bytes"
 	"fmt"
 	"log"
 	"net/url"
@@ -116,26 +115,14 @@ func (c *Config) marshallInto(into *os.File, xtream bool) error {
 	ret := 0
 	into.WriteString("#EXTM3U\n") // nolint: errcheck
 	for i, track := range c.playlist.Tracks {
-		var buffer bytes.Buffer
-
-		buffer.WriteString("#EXTINF:")                       // nolint: errcheck
-		buffer.WriteString(fmt.Sprintf("%d ", track.Length)) // nolint: errcheck
-		for i := range track.Tags {
-			if i == len(track.Tags)-1 {
-				buffer.WriteString(fmt.Sprintf("%s=%q", track.Tags[i].Name, track.Tags[i].Value)) // nolint: errcheck
-				continue
-			}
-			buffer.WriteString(fmt.Sprintf("%s=%q ", track.Tags[i].Name, track.Tags[i].Value)) // nolint: errcheck
-		}
-
+		
 		uri, err := c.replaceURL(track.URI, i-ret, xtream)
 		if err != nil {
 			ret++
 			log.Printf("ERROR: track: %s: %s", track.Name, err)
 			continue
 		}
-
-		into.WriteString(fmt.Sprintf("%s, %s\n%s\n", buffer.String(), track.Name, uri)) // nolint: errcheck
+		into.WriteString(fmt.Sprintf("%s\n%s\n", track.Origin, uri)) // nolint: errcheck
 
 		filteredTrack = append(filteredTrack, track)
 	}
